@@ -67,15 +67,27 @@ return true;
      * @return a string consisting of str1 minus all the characters of str2
     */
     public static String remove(String str1, String str2) {
-       String newstr = "";
-       for (int i = 0; i < str1.length(); i++) {
-        for (int j = 0; j < str2.length(); j++) {
-            if (str1.charAt(i) != str2.charAt(j)) {
-                newstr += str1.charAt(i);
-            } 
+        char[] stra = new char[str1.length()];
+        char[] strb = new char[str2.length()];
+        for (int i = 0; i < str1.length(); i++) stra[i] = str1.charAt(i);  
+        for (int i = 0; i < str2.length(); i++) strb[i] = str2.charAt(i);     
+       for (int i = 0; i<str1.length(); i++) {
+        for(int j=0; j<str2.length(); j++){
+            if (stra[i] == strb[j] && strb[j] != '0') {
+                stra[i] = '0';
+                strb[j] = '0';
+            }
         }
     }
-        return null;
+    String newstr = "";
+    for (int i=0; i<str1.length(); i++) {
+        if(stra[i] != '0') {
+            newstr += stra[i];
+        }
+    }
+    return newstr;
+
+        
     }
 
     /**
