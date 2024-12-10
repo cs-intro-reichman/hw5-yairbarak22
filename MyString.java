@@ -8,64 +8,41 @@ public class MyString {
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
+        System.out.println(randomStringOfLetters(5));
+        System.out.println(randomStringOfLetters(8));
         //// Put your other tests here.
     }
 
-    /**
-     * Returns the number of times the given character appears in the given string.
-     * Example: countChar("Center",'e') returns 2 and countChar("Center",'c') returns 0. 
-     * 
-     * @param str - a string
-     * @param c - a character
-     * @return the number of times c appears in str
-     */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int sum = 0;
+        for (int i=0; i < str.length(); i++) {
+            if (str.charAt(i) == ch) sum++;
+        }
+        return sum;
     }
 
-    /** Returns true if str1 is a subset string str2, false otherwise
-     *  Examples:
-     *  subsetOf("sap","space") returns true
-     *  subsetOf("spa","space") returns true
-     *  subsetOf("pass","space") returns false
-     *  subsetOf("c","space") returns true
-     *
-     * @param str1 - a string
-     * @param str2 - a string
-     * @return true is str1 is a subset of str2, false otherwise
-     */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+         if (str2.indexOf(str1) >= 0) return true;
+         else return false;
     }
 
-    /** Returns a string which is the same as the given string, with a space
-     * character inserted after each character in the given string, except
-     * for the last character. 
-     * Example: spacedString("silent") returns "s i l e n t"
-     * 
-     * @param str - a string
-     * @return a string consisting of the characters of str, separated by spaces.
-     */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String newstr = "";
+        for (int i=0; i < str.length(); i++) {
+            newstr += str.charAt(i) + " ";
+        }
+        return newstr;
     }
   
-    /**
-     * Returns a string of n lowercase letters, selected randomly from 
-     * the English alphabet 'a', 'b', 'c', ..., 'z'. Note that the same
-     * letter can be selected more than once.
-     * 
-     * Example: randomStringOfLetters(3) can return "zoo"
-     * 
-     * @param n - the number of letter to select
-     * @return a randomly generated string, consisting of 'n' lowercase letters
-     */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String newstr = "";
+        char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
+        for (int i = 0; i < n; i++) {
+            double m = Math.random() * 26;
+            newstr += letters[(int) m];
+        }
+        return newstr;
     }
 
     /**
@@ -76,9 +53,20 @@ public class MyString {
      * @param str1 - a string
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
-     */
+    */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
+       String newstr = "";
+       String newstr2 = "";
+       for (int i = 0; i < str1.length(); i++) {
+        for (int j = 0; j < str2.length(); j++) {
+            if (str1.charAt(i) != str2.charAt(j)) {
+                newstr += str1.charAt(i);
+            } else {
+                
+            }
+        }
+        
+       }
         return null;
     }
 
