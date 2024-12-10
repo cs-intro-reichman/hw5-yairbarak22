@@ -22,14 +22,26 @@ public class MyString {
     }
 
     public static boolean subsetOf(String str1, String str2) {
-         if (str2.indexOf(str1) >= 0) return true;
-         else return false;
+        char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        int[] rankstr2 = new int[26];
+        int[] rankstr1 = new int[26];
+        for (int i = 0; i < 26; i++) {
+            rankstr2[i] = countChar(str2, (char) letters[i]);
+            rankstr1[i] = countChar(str1, (char) letters[i]);      
+        }
+        for(int j=0; j<26 ; j++){
+        if (rankstr2[j] < rankstr1[j]) {
+            return false;
+        } 
+    }
+return true;
     }
 
     public static String spacedString(String str) {
         String newstr = "";
-        for (int i=0; i < str.length(); i++) {
-            newstr += str.charAt(i) + " ";
+        for (int i=0; i < str.length() ; i++) {
+            if ( i != str.length()-1) newstr += str.charAt(i) + " ";
+            else newstr += str.charAt(i);
         }
         return newstr;
     }
@@ -56,17 +68,13 @@ public class MyString {
     */
     public static String remove(String str1, String str2) {
        String newstr = "";
-       String newstr2 = "";
        for (int i = 0; i < str1.length(); i++) {
         for (int j = 0; j < str2.length(); j++) {
             if (str1.charAt(i) != str2.charAt(j)) {
                 newstr += str1.charAt(i);
-            } else {
-                
-            }
+            } 
         }
-        
-       }
+    }
         return null;
     }
 
