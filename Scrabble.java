@@ -55,6 +55,15 @@ public class Scrabble {
 		}
 		return false;
 	}
+
+	public static boolean isSubsetWordInDictionary(String word) {
+		for (int i=0; i< NUM_OF_WORDS; i++) {
+			if (MyString.subsetOf(DICTIONARY[i], word)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	// Returns the Scrabble score of the given word.
 	// If the length of the word equals the length of the hand, adds 50 points to the score.
@@ -108,14 +117,7 @@ public class Scrabble {
 				if (!isWordInDictionary(input)) break;
 				score += wordScore(input); 
 				hand = MyString.remove(hand, input);
-				boolean continue1 = false;
-				for (int i=0; i< NUM_OF_WORDS; i++) {
-					if (MyString.subsetOf(DICTIONARY[i], hand)) {
-						continue1 = true;
-						 break;
-					}
-				}
-				if (!continue1) break;
+				if (!isSubsetWordInDictionary(hand)) break;
 			}
 		}
 		if (hand.length() == 0) {
