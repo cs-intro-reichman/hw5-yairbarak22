@@ -98,58 +98,36 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
+		int n = hand.length();
 		int score = 0;
-		In in = new In(); // שימוש במחלקת In לקריאת קלט
-	
+		// Declares the variable in to refer to an object of type In, and initializes it to represent
+		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
+		In in = new In();
 		while (hand.length() > 0) {
-			// הצגת היד הנוכחית (לפי המבנה המקורי)
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
-	
-			// קריאת הקלט
-			String input = in.readString().trim();
-	
-			// סיום המשחק לפי קלט '.'
-			if (input.equals(".")) {
+			// Reads the next "token" from the keyboard. A token is defined as a string of 
+			// non-whitespace characters. Whitespace is either space characters, or  
+			// end-of-line characters.
+			String input = in.readString();
+			if(input.indexOf('.') >=0 || input.length() == 0) {
 				break;
 			}
-	
-			// בדיקת תקינות המילה
-			if (!isWordInDictionary(input)) {
-				// המילה אינה חוקית
-				System.out.println("Invalid word. Try again.");
-				continue;
-			}
-	
-			// בדיקה אם המילה ניתנת להרכבה מהיד הנוכחית
-			if (!MyString.subsetOf(input, hand)) {
-				// המילה אינה מתאימה לאותיות ביד
-				System.out.println("Word cannot be made from current hand. Try again.");
-				continue;
-			}
-	
-			// חישוב הניקוד עבור המילה
-			int wordPoints = wordScore(input);
-			score += wordPoints;
-	
-			// הצגת הניקוד שהתקבל
-			System.out.println(input + " earned " + wordPoints + " points. Total score: " + score + " points.");
-	
-			// עדכון היד
-			hand = MyString.remove(hand, input);
-	
-			// בדיקה אם יש מילים חוקיות שנותרו
-			if (!isSubsetWordInDictionary(hand)) {
-				// אין מילים חוקיות נוספות
-				System.out.println("No more valid words can be formed. Ending hand.");
-				break;
+			else {
+				if (!isWordInDictionary(input)) break;
+				score += wordScore(input); 
+				hand = MyString.remove(hand, input);
+				System.out.println(input + " earned " + wordScore(input) + " points. Score: "+score+" points.");
+				if (!isSubsetWordInDictionary(hand)) break;
 			}
 		}
-	
-		// סיום המשחק עם הצגת הניקוד הכולל
-		System.out.println("End of hand. Total score: " + score + " points");
+		if (hand.length() == 0) {
+	        System.out.println("Ran out of letters. Total score: " + score + " points");
+		} else {
+			System.out.println("End of hand. Total score: " + score + " points");
+		}
 	}
-	
+
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
 	// to end the game. If the user enters any other input, writes an error message.
 	public static void playGame() {
