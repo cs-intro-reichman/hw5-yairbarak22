@@ -110,7 +110,7 @@ public class Scrabble {
 				hand = MyString.remove(hand, input);
 				boolean continue1 = false;
 				for (int i=0; i< NUM_OF_WORDS; i++) {
-					if (MyString.subsetOf(hand, DICTIONARY[i])) {
+					if (MyString.subsetOf(DICTIONARY[i], hand)) {
 						continue1 = true;
 						 break;
 					}
