@@ -112,7 +112,7 @@ public class Scrabble {
 			}
 			else if (!isWordInDictionary(input)) {
 					System.out.println("Invalid word. Try again.");
-				} else if(MyString.subsetOf(input, hand)){
+				} else if(!MyString.subsetOf(input, hand)){
 					System.out.println("Word cannot be made from current hand. Try again.");
 					
 				} else {
