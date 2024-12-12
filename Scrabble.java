@@ -108,10 +108,14 @@ public class Scrabble {
 				if (!isWordInDictionary(input)) break;
 				score += wordScore(input); 
 				hand = MyString.remove(hand, input);
+				boolean continue1 = false;
 				for (int i=0; i< NUM_OF_WORDS; i++) {
-					if (!MyString.subsetOf(hand, DICTIONARY[i])) break;
+					if (MyString.subsetOf(hand, DICTIONARY[i])) {
+						continue1 = true;
+						 break;
+					}
 				}
-
+				if (!continue1) break;
 			}
 		}
 		if (hand.length() == 0) {
