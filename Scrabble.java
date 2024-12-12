@@ -106,16 +106,22 @@ public class Scrabble {
 		while (hand.length() > 0) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
-			String input = in.readString();
+			String input;
+			while (true) {
+			input = in.readString();
+			 if(MyString.subsetOf(hand, input)){
+				System.out.println("Word cannot be made from current hand. Try again.");	
+				
+			} else if (!isWordInDictionary(input)) {
+				System.out.println("Invalid word. Try again.");
+				
+			}
+			else break;
+			}
 			if(input.indexOf('.') >=0 || input.length() == 0) {
 				break;
 			}
-			else if (!isWordInDictionary(input)) {
-					System.out.println("Invalid word. Try again.");
-				} else if(MyString.subsetOf(hand, input)){
-					System.out.println("Word cannot be made from current hand. Try again.");
-					
-				} else {
+			else  {
 				score += wordScore(input); 
 				hand = MyString.remove(hand, input);
 				System.out.println(input + " earned " + wordScore(input) + " points. Score: "+score+" points.");
